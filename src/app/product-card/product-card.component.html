@@ -1,0 +1,31 @@
+<div class="elements">
+  <input type="text" placeholder="Search Products" (input)="onSearch()" [(ngModel)]="searchitem"/>
+  <div>
+    <label>
+      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="allproducts" /> All products
+    </label>
+    <label>
+      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="instock" /> Instock
+    </label>
+    <label>
+      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="outofstock" /> Out of stock
+    </label>
+  </div>
+  <button class="cartbtn" (click)="viewcart()">{{showcart ? 'Home' : '🛒 Cart'}}</button>
+</div>
+<ul *ngIf="!showcart" class="products">
+  <li class="product" *ngFor="let product of filteredproducts; let i = index">
+    <img class="images" [src]="product.images[0]" alt="product.title" />
+    <h4>Title: {{product.title}}</h4>
+    <p>Price: {{product.price}}</p>
+    <p>Description: {{product.showmore ? product.description : product.description.substring(0,60) + '...'}}
+      <span (click)="showmoresetting(i)" class="show-content">show {{ product.showmore ? "less" : "more" }}</span>
+    </p>
+    <p>Category: {{product.category}}</p>
+    <p>Brand: {{product.brand}}</p>
+    <p [appStockHighlight]="product.stock">Stock: {{product.stock}}</p>
+    <button class="atcbtn" (click)="atcbtn(i)">Add to Cart</button>
+  </li>
+</ul>
+
+<app-cart *ngIf="showcart" [cartproducts]="cartproducts"></app-cart>

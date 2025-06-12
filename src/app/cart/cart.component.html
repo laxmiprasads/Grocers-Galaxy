@@ -1,0 +1,13 @@
+<ul class="products">
+  <h1 class="emptymsg" *ngIf="cartproducts.length === 0">🚫 Cart is empty.</h1>
+  <li class="product" *ngFor="let product of cartproducts; let i = index">
+    <img class="images" [src]="product.images[0]" alt="product.title" />
+    <h4>Title: {{product.title}}</h4>
+    <p>Price: {{product.price}}</p>
+    <p>Description: {{product.description}}</p>
+    <p>Category: {{product.category}}</p>
+    <p>Brand: {{product.brand}}</p>
+    <p>Status: {{product.availabilityStatus}}</p>
+    <p>Stock: {{product.stock}}</p>
+  </li>
+</ul>

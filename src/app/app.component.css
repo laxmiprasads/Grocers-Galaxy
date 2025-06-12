@@ -1,0 +1,16 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  padding-right:110px ;
+  color: rgb(255, 153, 0);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding-left:50px ;
+  background-color: rgb(184, 253, 157);
+}
+.navbar-items{
+  display: flex;
+  list-style-type:none;
+  gap: 25px;
+}
