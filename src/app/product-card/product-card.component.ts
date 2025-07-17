@@ -3,6 +3,9 @@ import { Component, Input } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { StockHighlightDirective } from '../stock-highlight.directive';
+import { Product } from '../product.model';
+import { ProductService } from '../product.service';
+
 @Component({
   selector: 'app-product-card',
   imports: [CommonModule,CartComponent,FormsModule, StockHighlightDirective],
@@ -12,47 +15,48 @@ import { StockHighlightDirective } from '../stock-highlight.directive';
 export class ProductCardComponent {
   showcart: boolean = false;
   category: string = 'allproducts';
-  searchitem:string = '';
+  searchitem :string = '';
+  userRole: string | null = null;
   viewcart() {
     this.showcart = !this.showcart;
   }
+  expandedId: number | null = null;
+    toggleDescription(id: number) {
+      this.expandedId = this.expandedId === id ? null : id;
+    }
+
   
-  @Input() products: {id: number;title: string;price: number;description: string;category:string;brand:string;availabilityStatus:string;stock: number;images:string[];showmore:boolean}[] = [];
-
-  cartproducts:{id: number;title: string;price: number;description: string;category:string;brand:string;availabilityStatus:string;stock: number;images:string[];showmore:boolean}[] = [];
-
-  filteredproducts:{id: number;title: string;price: number;description: string;category:string;brand:string;availabilityStatus:string;stock: number;images:string[];showmore:boolean}[] = [];
-
-  showmoresetting(index:number) {
-    this.filteredproducts[index].showmore = !this.filteredproducts[index].showmore;
+  @Input() products: Product[] =[];
+  cartproducts: Product[] =[];
+  constructor(private productService: ProductService) {}
+  
+  filteredProducts(){
+    return this.products.filter(p => {
+      const MatchSearch =p.title && p.title.toLowerCase().includes(this.searchitem?.toLowerCase())
+      const MatchStock =
+        this.category === 'allproducts' ||
+        (this.category === 'instock' && p.status === 'Instock') ||
+        (this.category === 'outofstock' && p.status === 'Out of stock');
+      return MatchSearch && MatchStock;
+    });
+    }
+    
+  ngOnInit() {
+    this.filteredProducts();
+    this.userRole = localStorage.getItem('role')
   }
-  onSearch() {
-    this.filteredproducts = this.products.filter(product =>
-      product.title.toLowerCase().includes(this.searchitem.toLowerCase())
-    )
-  }
-  categorychange() {
-    if (this.category === 'allproducts') {
-      this.filteredproducts=[]
-      this.filteredproducts = this.products.filter((product) => {
-        return true
-      })
-    } else if (this.category === 'instock'){
-      this.filteredproducts=[]
-      this.filteredproducts = this.products.filter((product) => {
-        return product.availabilityStatus === 'In Stock'
-      })
-    } else if (this.category === 'outofstock') {
-      this.filteredproducts=[]
-      this.filteredproducts = this.products.filter((product) => {
-        return product.availabilityStatus === 'Low Stock'
-      })
+  
+  atcbtn(product: Product) {
+    if (!this.cartproducts.find(p => p.id === product.id)) {
+      this.cartproducts.push(product);
     }
   }
-  ngOnInit() {
-    this.categorychange()
-  }
-  atcbtn(index:number) {
-    this.cartproducts.push(this.products[index])
+  
+  ondelete(id: number) {
+    this.productService.deleteProduct(id).subscribe({
+      next: () => {
+        this.products = this.products.filter(product => product.id !== id);
+      }
+    })
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-
+import { Product } from '../product.model';
 @Component({
   selector: 'app-cart',
   imports: [CommonModule],
@@ -8,5 +8,12 @@ import { Component, Input } from '@angular/core';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
-  @Input() cartproducts:{id: number;title: string;price: number;description: string;category:string;brand:string;availabilityStatus:string;stock: number;images:string[];showmore:boolean}[] = [];
+  @Input() cartproducts: Product[] =[];
+  expandedId: number | null = null;
+    toggleDescription(id: number) {
+      this.expandedId = this.expandedId === id ? null : id;
+    }
+removeFromCart(id: number) {
+  this.cartproducts = this.cartproducts.filter(product => product.id !== id);
+}
 }

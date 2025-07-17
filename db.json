@@ -1,0 +1,81 @@
+{
+  "products": [
+    {
+      "id": "4a9e",
+      "title": "Shirt",
+      "price": 1999,
+      "description": "Brown solid opaque Casual shirt ,has a spread collar, button placket, 1 patch pocket, long regular sleeves, curved hem.60% Polyester 40% Cotton, Machine wash\n",
+      "brand": "Rare Rabit",
+      "status": "Instock",
+      "stock": 80
+    },
+    {
+      "id": "0f4b",
+      "title": "Patterned Saree",
+      "price": 1999,
+      "description": "Wrap yourself in elegance with our damson purple jaal patterned saree, beautifully adorned with intricate borders that highlight its luxurious design. The rich purple hue adds a touch of regal sophistication, making it perfect for weddings and festive celebrations.",
+      "brand": "Manyavar",
+      "status": "Instock",
+      "stock": 20
+    },
+    {
+      "id": "1c2d",
+      "title": "Casual Shoes",
+      "price": 2999,
+      "description": "Black solid casual shoes, has a round toe, lace-up detail, cushioned footbed, textured outsole with patterned grooves. PU (polyurethane), Wipe with a clean, dry cloth to remove dust.",
+      "brand": "Puma",
+      "status": "Instock",
+      "stock": 50
+    },
+    {
+      "id": "3e5f",
+      "title": "Formal Shoes",
+      "price": 3999,
+      "description": "Brown solid formal shoes, has a round toe, lace-up detail, cushioned footbed, textured outsole with patterned grooves. PU (polyurethane), Wipe with a clean, dry cloth to remove dust.",
+      "brand": "Red Tape",
+      "status": "out of stock",
+      "stock": 30
+    },
+    {
+      "id": "0b70",
+      "title": "Saree",
+      "price": 1999,
+      "description": "Sarees - Pick from the designer range of Saris online for ladies & girls.",
+      "brand": "Silk Folks",
+      "status": "Out of stock",
+      "stock": 5
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin1",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "5",
+      "username": "admin2",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "user123",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "username": "user2",
+      "password": "user123",
+      "role": "user"
+    },
+    {
+      "id": "4",
+      "username": "user3",
+      "password": "user123",
+      "role": "user"
+    }
+  ]
+}

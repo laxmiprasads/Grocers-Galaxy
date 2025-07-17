@@ -1,30 +1,39 @@
 <div class="elements">
-  <input type="text" placeholder="Search Products" (input)="onSearch()" [(ngModel)]="searchitem"/>
+  <input type="text" placeholder="Search Products" (input)="filteredProducts()" [(ngModel)]="searchitem"/>
   <div>
     <label>
-      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="allproducts" /> All products
+      <input type="radio" name="category" (change)="filteredProducts()" [(ngModel)]="category" value="allproducts" /> All products
     </label>
     <label>
-      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="instock" /> Instock
+      <input type="radio" name="category" (change)="filteredProducts()" [(ngModel)]="category" value="instock" /> Instock
     </label>
     <label>
-      <input type="radio" name="category" (change)="categorychange()" [(ngModel)]="category" value="outofstock" /> Out of stock
+      <input type="radio" name="category" (change)="filteredProducts()" [(ngModel)]="category" value="outofstock"/> Out of stock
     </label>
   </div>
-  <button class="cartbtn" (click)="viewcart()">{{showcart ? 'Home' : '🛒 Cart'}}</button>
+  <button *ngIf="userRole == 'user'" class="cartbtn" (click)="viewcart()">{{showcart ? 'Home' : '🛒 Cart'}}</button>
 </div>
+
 <ul *ngIf="!showcart" class="products">
-  <li class="product" *ngFor="let product of filteredproducts; let i = index">
-    <img class="images" [src]="product.images[0]" alt="product.title" />
-    <h4>Title: {{product.title}}</h4>
-    <p>Price: {{product.price}}</p>
-    <p>Description: {{product.showmore ? product.description : product.description.substring(0,60) + '...'}}
-      <span (click)="showmoresetting(i)" class="show-content">show {{ product.showmore ? "less" : "more" }}</span>
+  <li class="product" *ngFor="let product of filteredProducts(); let i = index">
+    <p><span class="details">Title:</span> {{product.title}}</p>
+    <p><span class="details">Price:</span> {{product.price | currency:'INR'}}</p>
+    <p><span class="details">Description:</span>
+      <ng-container *ngIf="expandedId === product.id; else shortDesc">
+        {{ product.description }}
+      </ng-container>
+      <ng-template #shortDesc>
+        {{ product.description | slice: 0: 60 }}...
+        
+      </ng-template>
+      <span (click)="toggleDescription(product.id!)" class="shows-btn">
+        {{ expandedId === product.id ? 'show less' : 'show more' }}
+      </span>
     </p>
-    <p>Category: {{product.category}}</p>
-    <p>Brand: {{product.brand}}</p>
-    <p [appStockHighlight]="product.stock">Stock: {{product.stock}}</p>
-    <button class="atcbtn" (click)="atcbtn(i)">Add to Cart</button>
+   <p><span class="details">Brand:</span> {{product.brand}}</p>
+    <p [appStockHighlight]="product.stock"><span class="details">Stock:</span> {{product.stock}}</p>
+    <button *ngIf="userRole == 'user'" class="atcbtn" (click)="atcbtn(product)">Add to Cart</button>
+    <button class="delbtn" (click)="ondelete(product.id!)">Delete</button>
   </li>
 </ul>
 
