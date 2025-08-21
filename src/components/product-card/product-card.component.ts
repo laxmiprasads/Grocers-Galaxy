@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 import { FormsModule } from '@angular/forms';
-import { StockHighlightDirective } from '../stock-highlight.directive';
-import { Product } from '../product.model';
-import { ProductService } from '../product.service';
+import { StockHighlightDirective } from '../../app/stock-highlight.directive';
+import { Product } from '../../app/product.model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-card',

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-login',
   imports: [FormsModule, RouterModule,CommonModule],
@@ -12,6 +12,11 @@ import { UserService } from '../user.service';
 export class LoginComponent {
   username!: string;
   password!: string;
+  role!: string;
+  email!: string;
+
+  signin = true;
+
   constructor(private userService: UserService,private router:Router) {}
   
   gotohome(){
@@ -28,5 +33,11 @@ export class LoginComponent {
         this.password = '';
       }
     })
+  }
+  gotosignup(){
+    this.signin = false;
+  }
+  gotosignin() {
+    this.signin = true;
   }
 }

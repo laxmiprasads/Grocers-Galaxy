@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { ProductService } from '../product.service';
-import { Product } from '../product.model';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../app/product.model';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';

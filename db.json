@@ -44,6 +44,15 @@
       "brand": "Silk Folks",
       "status": "Out of stock",
       "stock": 5
+    },
+    {
+      "id": "0858",
+      "title": "",
+      "price": 0,
+      "description": "",
+      "brand": "",
+      "status": "",
+      "stock": 0
     }
   ],
   "users": [

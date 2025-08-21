@@ -33,7 +33,7 @@
    <p><span class="details">Brand:</span> {{product.brand}}</p>
     <p [appStockHighlight]="product.stock"><span class="details">Stock:</span> {{product.stock}}</p>
     <button *ngIf="userRole == 'user'" class="atcbtn" (click)="atcbtn(product)">Add to Cart</button>
-    <button class="delbtn" (click)="ondelete(product.id!)">Delete</button>
+    <button *ngIf="userRole == 'admin'" class="delbtn" (click)="ondelete(product.id!)">Delete</button>
   </li>
 </ul>
 
